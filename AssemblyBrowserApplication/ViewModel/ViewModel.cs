@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using AssemblyBrowser.Model;
+using AssemblyBrowserApplication.Model;
 
-namespace AssemblyBrowser.ViewModel
+namespace AssemblyBrowserApplication.ViewModel
 {
     public class ViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
@@ -21,7 +17,7 @@ namespace AssemblyBrowser.ViewModel
 
         private string _assemblyPath = "";
         private List<Node> _assemblyTree;
-        private OpenFileDialogCommand _openFileDialog;
+        private OpenFileDialogCommand? _openFileDialog;
 
         public string AssemblyPath
         {
@@ -29,7 +25,7 @@ namespace AssemblyBrowser.ViewModel
             set
             {
                 _assemblyPath = value;
-                AssemblyTree = AssemblyInfoToTreeConverter.Convert(Core.GetTree(AssemblyPath));
+                AssemblyTree = AssemblyInfoToTreeConverter.Convert(Core.GetTree(AssemblyPath));                
                 OnPropertyChanged(nameof(AssemblyTree));
             }
         }
@@ -40,7 +36,7 @@ namespace AssemblyBrowser.ViewModel
             set => _assemblyTree = value;
         }
 
-
+        
         public OpenFileDialogCommand OpenFileDialog
         {
             get
@@ -68,3 +64,5 @@ namespace AssemblyBrowser.ViewModel
         }
     }
 }
+
+

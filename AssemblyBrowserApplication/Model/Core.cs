@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WpfLibrary;
+using AssemblyBrowserLibrary.AssemblyComposition;
+using AssemblyBrowserLibrary;
 
-namespace AssemblyBrowser.Model
+namespace AssemblyBrowserApplication.Model
 {
     public static class Core
     {
         public static AssemblyInfo GetTree(string filename)
         {
-            WpfLibrary.AssemblyBrowser assemblyBrowser = new WpfLibrary.AssemblyBrowser(filename);
+            AssemblyBrowser assemblyBrowser = new AssemblyBrowser(filename);
             return assemblyBrowser.GetAssemblyInfo();
         }
     }

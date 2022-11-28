@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WpfLibrary;
+using AssemblyBrowserLibrary.AssemblyComposition;
 
-namespace AssemblyBrowser.ViewModel
+namespace AssemblyBrowserApplication.ViewModel
 {
     public static class AssemblyInfoToTreeConverter
     {
@@ -29,29 +29,29 @@ namespace AssemblyBrowser.ViewModel
             foreach (var typeInfo in namespaceInfo.Types)
             {
                 Node node = new Node();
-                node.Header = "Type: " + typeInfo.Type + " " + typeInfo.TypeName;
-                node.Nodes = GetMethodNodes(typeInfo);
+                node.Header = "Type Description: " + typeInfo.TypeDesc + " " + typeInfo.TypeName;
+                node.Nodes = GetFieldsPropsMethodsNodes(typeInfo);
                 nodes.Add(node);
             }
 
             return nodes;
         }
 
-        private static List<Node> GetMethodNodes(TypeInfo classInfo)
+        private static List<Node> GetFieldsPropsMethodsNodes(TypeInfo classInfo)
         {
             List<Node> nodes = new List<Node>();
 
             foreach (var field in classInfo.Fields)
             {
                 Node node = new Node();
-                node.Header = "Field: " + field.VarType + " " + field.VarName;
+                node.Header = "Field: " + field.FieldType + " " + field.FieldName;
                 nodes.Add(node);
             }
 
             foreach (var property in classInfo.Properties)
             {
                 Node node = new Node();
-                node.Header = "Property: " + property.VarType + " " + property.VarName;
+                node.Header = "Property: " + property.PropertyType + " " + property.PropertyName;
                 nodes.Add(node);
             }
 
@@ -72,7 +72,7 @@ namespace AssemblyBrowser.ViewModel
             foreach (var param in methodInfo.Parameters)
             {
                 Node node = new Node();
-                node.Header = "Parameter: " + param.VarType + " " + param.VarName;
+                node.Header = "Parameter: " + param.FieldType + " " + param.FieldName;
                 nodes.Add(node);
             }
 

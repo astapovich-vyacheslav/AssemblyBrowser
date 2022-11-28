@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AssemblyBrowserLibrary.AssemblyComposition;
 
-namespace WpfLibrary
+namespace AssemblyBrowserLibrary
 {
     public class AssemblyBrowser
     {
-        private readonly System.Reflection.Assembly _assembly;
+        private readonly System.Reflection.Assembly? _assembly;
 
 
         public AssemblyBrowser(string filename)
@@ -24,7 +20,7 @@ namespace WpfLibrary
 
         }
 
-        public AssemblyInfo GetAssemblyInfo()
+        public AssemblyInfo? GetAssemblyInfo()
         {
             if (_assembly != null)
             {
@@ -38,7 +34,7 @@ namespace WpfLibrary
 
         private List<NamespaceInfo> GetNamespaceInfo()
         {
-            IEnumerable<string> namespaces = _assembly.GetTypes().Select(type => type.Namespace).Distinct();
+            IEnumerable<string?> namespaces = _assembly.GetTypes().Select(type => type.Namespace).Distinct();
             List<NamespaceInfo> namespaceInfos = new List<NamespaceInfo>();
 
             foreach (string namespaceName in namespaces)
@@ -67,7 +63,7 @@ namespace WpfLibrary
                     typeInfo.Type = "Interface";
                 else if (type.IsEnum)
                     typeInfo.Type = "Enam";
-                else
+                else 
                     typeInfo.Type = "Type";
                 typeInfo.Fields = GetFieldInfo(type);
                 typeInfo.Properties = GetPropertyInfo(type);
@@ -86,24 +82,24 @@ namespace WpfLibrary
             foreach (var field in fields)
             {
                 FieldInfo fieldInfo = new FieldInfo();
-                fieldInfo.VarName = field.Name;
-                fieldInfo.VarType = field.FieldType.Name;
+                fieldInfo.FieldName = field.Name;
+                fieldInfo.FieldType = field.FieldType.Name;
                 fieldInfos.Add(fieldInfo);
             }
 
             return fieldInfos;
         }
 
-        private List<PropInfo> GetPropertyInfo(Type classType)
+        private List<PropertyInfo> GetPropertyInfo(Type classType)
         {
             var properties = classType.GetProperties();
-            List<PropInfo> propertyInfos = new List<PropInfo>();
+            List<PropertyInfo> propertyInfos = new List<PropertyInfo>();
 
             foreach (var property in properties)
             {
-                PropInfo propertyInfo = new PropInfo();
-                propertyInfo.VarName = property.Name;
-                propertyInfo.VarType = property.PropertyType.Name;
+                PropertyInfo propertyInfo = new PropertyInfo();
+                propertyInfo.PropertyName = property.Name;
+                propertyInfo.PropertyType = property.PropertyType.Name;
                 propertyInfos.Add(propertyInfo);
             }
 
@@ -135,8 +131,8 @@ namespace WpfLibrary
             foreach (var param in parametrs)
             {
                 FieldInfo parametrInfo = new FieldInfo();
-                parametrInfo.VarName = param.Name;
-                parametrInfo.VarType = param.ParameterType.Name;
+                parametrInfo.FieldName = param.Name;
+                parametrInfo.FieldType = param.ParameterType.Name;
                 parameterInfos.Add(parametrInfo);
             }
 
