@@ -58,13 +58,13 @@ namespace AssemblyBrowserLibrary
                 TypeInfo typeInfo = new TypeInfo();
                 typeInfo.TypeName = type.Name;
                 if (type.IsClass)
-                    typeInfo.Type = "Class";
+                    typeInfo.TypeDesc = "Class";
                 else if (type.IsInterface)
-                    typeInfo.Type = "Interface";
+                    typeInfo.TypeDesc = "Interface";
                 else if (type.IsEnum)
-                    typeInfo.Type = "Enam";
+                    typeInfo.TypeDesc = "Enum";
                 else 
-                    typeInfo.Type = "Type";
+                    typeInfo.TypeDesc = "Other";
                 typeInfo.Fields = GetFieldInfo(type);
                 typeInfo.Properties = GetPropertyInfo(type);
                 typeInfo.Methods = GetMethodInfo(type);
